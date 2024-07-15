@@ -1,0 +1,15 @@
+[Desktop Entry]
+Name=BibleRunner
+Comment=Quickly lookup bible verses form KRunner.
+X-KDE-ServiceTypes=Plasma/Runner
+Type=Service
+Icon=bible_runner
+X-KDE-PluginInfo-Author=Jaanonim
+X-KDE-PluginInfo-Email=mat8mro@gmail.com
+X-KDE-PluginInfo-Name=bible_runner
+X-KDE-PluginInfo-Version=1.0
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-EnabledByDefault=true
+X-Plasma-API=DBus
+X-Plasma-DBusRunner-Service=com.jaanonim.bible_runner
+X-Plasma-DBusRunner-Path=/bible_runner
