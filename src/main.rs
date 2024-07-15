@@ -93,38 +93,45 @@ impl Runner {
             _ => None,
         }?;
 
-        self.results = HashMap::from([
-            ("bible_copy".to_owned(), make_copy_match(&url)),
-            (
-                "bible_browser".to_owned(),
-                make_browser_match(book, &text, &url),
-            ),
-        ]);
+        self.results = [
+            ("bible_copy", make_copy_match(&url)),
+            ("bible_browser", make_browser_match(book, &text, &url)),
+        ]
+        .into_iter()
+        .filter_map(|(k, v)| v.map(|v| (k.to_owned(), v)))
+        .collect();
 
         Some(self.results.values().map(|ele| (*ele).clone()).collect())
     }
 }
 
-fn make_copy_match(url: &str) -> Match<Action> {
-    Match {
+fn make_copy_match(url: &str) -> Option<Match<Action>> {
+    let response = ureq::get(url)
+        .call()
+        .ok()
+        .and_then(|res| res.into_string().ok())?;
+
+    //TODO: to be continued
+
+    Some(Match {
         id: "bible_copy".to_owned(),
         title: format!("Hello there!").to_owned(),
         icon: "bible_runner".to_owned().into(),
         subtitle: Some("Copy text".to_owned()),
         multiline: true,
         ..Match::<Action>::default()
-    }
+    })
 }
 
-fn make_browser_match(book: &str, text: &str, url: &str) -> Match<Action> {
-    Match {
+fn make_browser_match(book: &str, text: &str, url: &str) -> Option<Match<Action>> {
+    Some(Match {
         id: "bible_browser".to_owned(),
         title: format!("Open {book} {text}").to_owned(),
         icon: "bible_runner".to_owned().into(),
         subtitle: Some("Open Bible in browser".to_owned()),
         urls: vec![url.to_owned()],
         ..Match::<Action>::default()
-    }
+    })
 }
 
 fn get_book_url(book: &str) -> String {
