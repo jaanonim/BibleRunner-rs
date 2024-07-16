@@ -12,6 +12,7 @@ path = "/bible_runner"
 arboard = "3.4.0"
 fancy-regex = "0.13.0"
 krunner = { version = "0.1.1", features = ["tokio", "derive"] }
+phf = { version = "0.11", features = ["macros"] }
 lazy_static = "1.5.0"
 regex = "1.10.5"
 serde_json = "1.0.120"
