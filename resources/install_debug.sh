@@ -1,9 +1,13 @@
 id=com.jaanonim.bible_runner
 name=bible_runner
 
-set -e
+echo `dirname $(realpath $0)`
+
+kill "$(pidof $name)"
 
 cd "$(dirname "$0")"
+
+echo "Path: $execPath"
 
 dataHome=~/.local/share
 
@@ -11,8 +15,7 @@ mkdir -p ~/.local/bin
 mkdir -p "$dataHome"/krunner/dbusplugins/
 mkdir -p "$dataHome"/dbus-1/services/
 
-echo "Installing $name"
-cp ../target/release/$name ~/.local/bin/$name
+cp ../target/debug/$name ~/.local/bin/$name
 
 serviceFileName=$id.service
 desktopFileName=plasma-runner-$name.desktop
@@ -24,6 +27,4 @@ cp $iconFileName /usr/share/icons/$iconFileName
 cat $serviceFileName | sed "s|Exec=|Exec=$execFullPath|" - > "$dataHome"/dbus-1/services/$serviceFileName
 cp $desktopFileName "$dataHome"/krunner/dbusplugins/$desktopFileName
 
-echo "Restart krunner"
-sudo kquitapp6 krunner
-echo "Done"
+kquitapp6 krunner
