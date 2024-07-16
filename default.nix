@@ -30,9 +30,9 @@ rustPlatform.buildRustPackage rec {
 
   desktopItem = makeDesktopItem {
     name = "plasma-runner-${name}";
-    desktopName = "Nix";
+    desktopName = "BibleRunner";
     type = "Service";
-    icon = "nix-snowflake";
+    icon = name;
     comment = description;
 
     extraConfig =
