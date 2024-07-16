@@ -2,11 +2,14 @@
 name = "bible_runner"
 version = "0.1.0"
 edition = "2021"
+authors = ["Jaanonim <mat8mro@gmail.com>"]
+description = "Quickly lookup bible verses form KRunner."
+repository = "https://github.com/jaanonim/BibleRunner-rs"
+license = "MIT"
 
 [package.metadata.krunner]
 service = "com.jaanonim.bible_runner"
 path = "/bible_runner"
-
 
 [dependencies]
 arboard = "3.4.0"
